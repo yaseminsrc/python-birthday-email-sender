@@ -1,27 +1,45 @@
 # 🎉 Python Birthday Email Sender
 
-Automated Python script that sends birthday emails using Gmail SMTP with secure environment variables.
+A production-ready Python application that automatically sends birthday emails based on a JSON dataset.
+
+The project is designed with clean architecture principles, testability, and real-world usage in mind.
 
 ---
 
 ## ✨ Features
 
-* 📧 Automated birthday email sending
-* 🔐 Secure credential handling with environment variables (`.env`)
-* 📄 JSON-based birthday list management
-* 🚫 Prevents duplicate emails on the same day
-* 🧪 Test mode for safe local testing
-* 💻 Works on Windows, macOS, and Linux
+- Automated birthday email sending
+- Gmail SMTP integration
+- Dry-run mode (no emails sent)
+- Test mode for development
+- Duplicate send prevention
+- CLI interface
+- Structured logging
+- Unit tests with pytest
+- Environment variable–based configuration
 
 ---
 
-## 🛠️ Tech Stack
+## 🧰 Technologies & Tools
 
-* **Python 3.9+**
-* `smtplib`
-* `email.message`
-* `datetime`
-* Gmail SMTP
+### Programming Language
+- **Python 3.11+**
+
+### Core Libraries
+- **smtplib** – SMTP email delivery
+- **email.message** – MIME email construction
+- **logging** – Structured application logging
+- **json** – Data persistence
+- **datetime** – Date handling
+
+### Testing
+- **pytest** – Unit testing framework
+- **tempfile / tmp_path** – Isolated filesystem testing
+- **Dependency Injection** – Mockable email service for tests
+
+### Configuration & Security
+- **Environment Variables** – Secure configuration management
+- **.env / example.env** – Local environment setup
 
 ---
 
@@ -30,79 +48,58 @@ Automated Python script that sends birthday emails using Gmail SMTP with secure 
 ```text
 python-birthday-email-sender/
 │
-├── birthday_sender.py   # Main application logic
-├── birthdays.json       # Birthday data
-├── example.env          # Environment variable example
+├── birthday_sender.py # Main application logic
+├── birthdays.json # Birthday data
+├── example.env # Environment variables example
 ├── .gitignore           # Git ignored files
-└── README.md
-```
+├── tests/
+│ └── test_birthday_sender.py
+├── app.log # Runtime logs
+└── PROJECT_DETAILS.md
 
+```
 ---
 
-## 🚀 Getting Started
+### 🔐 Environment Variables
 
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/yourusername/python-birthday-email-sender.git
-cd python-birthday-email-sender
-```
-
-### 2️⃣ Create `.env` file
-
-Copy the example file:
-
-```bash
-cp example.env .env
-```
-
-Edit `.env` and add your credentials:
+Create a `.env` file based on example.env:
 
 ```env
 BIRTHDAY_EMAIL=yourgmail@gmail.com
 BIRTHDAY_EMAIL_PASSWORD=your_app_password
 ```
-
 > ⚠️ Use **Gmail App Password**, not your normal Gmail password.
 
 ---
 
-### 3️⃣ Configure birthdays
+### 🚀 Usage
+Dry Run (no email sent)
 
-Edit `birthdays.json`:
-
-```json
-[
-  {
-    "name": "John Doe",
-    "email": "john@example.com",
-    "month": 12,
-    "day": 17
-  }
-]
 ```
-
+python birthday_sender.py --dry-run
+```
+Test Mode
+```
+python birthday_sender.py --test
+```
+Force a Date
+```
+python birthday_sender.py --date 12-17
+```
 ---
 
-### 4️⃣ Run the application
+##  🧪 Run Tests
+
+```
+pytest
+```
+---
+
+###  Run the application
 
 ```bash
 python birthday_sender.py
 ```
-
----
-
-## 🧪 Test Mode
-
-Enable test mode inside `birthday_sender.py`:
-
-```python
-TEST_MODE = True
-```
-
-* No emails will be sent
-* Actions will be printed to the console
-
 ---
 
 ## 🔐 Security Notes
@@ -113,20 +110,3 @@ TEST_MODE = True
 
 ---
 
-## ⏰ Automation
-
-You can schedule the script to run daily using:
-
-* **Windows Task Scheduler**
-* **cron (Linux / macOS)**
-
----
-
-## 📈 Project Level
-
-This project is suitable for **Junior+ to Mid-level Python developers**, demonstrating:
-
-* Automation scripting
-* Secure configuration handling
-* File-based data management
-* Basic production readiness
