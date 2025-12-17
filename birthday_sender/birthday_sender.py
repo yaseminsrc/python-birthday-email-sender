@@ -136,7 +136,7 @@ class BirthdayService:
         for person in birthdays:
             if person["month"] == today.month and person["day"] == today.day:
                 if self.already_sent(person["email"]):
-                    print(f"⚠️ Zaten gönderildi: {person['name']}")
+                    print(f"⚠️ It's already been sent: {person['name']}")
                     continue
 
                 subject, html = self.build_email(person["name"])
@@ -149,11 +149,11 @@ class BirthdayService:
                 if not self.config.DRY_RUN and not self.config.TEST_MODE:
                     self.log_sent(person["email"])
 
-                print(f"🎉 İşlendi: {person['name']}")
+                print(f"🎉 Processed: {person['name']}")
                 sent_any = True
 
         if not sent_any:
-            print("❌ Bugün doğum günü yok.")
+            print("❌ There is no birthday today.")
 
         logging.info("BirthdayService finished")
 
@@ -193,3 +193,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
